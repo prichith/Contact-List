@@ -6,6 +6,7 @@
 }
 ul{
   list-style: none;
+  /* display: none; */
 }
 a{
   text-decoration: none;
@@ -54,6 +55,7 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 15px;
 }
 .search-bar{
   max-width: 235px;
@@ -303,4 +305,25 @@ footer{
 .socialmedia i:last-child:hover{
   background-color: #C13584;
   border: 1px solid #C13584;
+}
+/* Form */
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid white;
+  padding: 40px 20px;
+  border-radius: 15px
+}
+form input{
+  border-radius: 5px;
+  border: none;
+  padding: 8px 30px;
+}
+.formContainer{
+  display: none;
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
