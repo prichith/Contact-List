@@ -321,7 +321,7 @@ form input{
   padding: 8px 30px;
 }
 .formContainer{
-  display: none;
+  /* display: none; */
   max-width: 500px;
   margin: 0 auto;
   padding-top: 50px;
