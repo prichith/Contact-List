@@ -45,7 +45,7 @@ input,button,select:hover{
   max-width: 1300px;
   margin: 0px auto;
   background-image: url("../public/image/milky-way-starry-sky-night-sky-star-956981.jpeg");
-  background-size: cover;
+  background-size: fill;
 }
 .container{
   padding: 10px 18px;
@@ -72,7 +72,7 @@ header{
 }
 .search-bar input{
   max-width: 212px;
-  height: 41.34px;
+  /* height: 41.34px; */
   border-radius: 49px;
   background-color: #F4F7FE;
   border: none;
@@ -106,7 +106,7 @@ input:hover{
 /* contact list */
 .list-head{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .list-head button{
   border-radius: 16px;
@@ -131,6 +131,11 @@ input:hover{
 .page h3{
   letter-spacing: 4px;
 }
+.contactList{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .list-page{
   height: 35px;
   width: 62px;
@@ -147,7 +152,7 @@ input:hover{
   line-height: normal;
 }
 .totalContacts{
-  font-size: 18px !important;
+  font-size: 20px !important;
   color: #FFF !important;
   font-weight: 600;
 }
@@ -174,7 +179,7 @@ li img{
 }
 .details{
   display: flex;
-  gap: 60px;
+  gap: 25px;
 }
 .details h4{
   color: #FFF;
@@ -182,8 +187,7 @@ li img{
 }
 .details div:first-child{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 .details div:nth-child(2){
   display: flex;
@@ -273,6 +277,7 @@ footer{
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
+  margin-left: 10px;
 }
 .socialmedia i {
   border: 1px solid white;
@@ -312,13 +317,28 @@ form{
   flex-direction: column;
   gap: 20px;
   border: 1px solid white;
-  padding: 40px 20px;
-  border-radius: 15px
+  padding: 25px 20px 40px 20px;
+  border-radius: 15px;
+  background-color: rgb(13 4 40 / 50%);
 }
 form input{
   border-radius: 5px;
   border: none;
   padding: 8px 30px;
+}
+form button{
+  border-radius: 5px;
+  border: none;
+  padding: 8px 30px;
+  color: #0a166f;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+}
+form button:hover{
+  color: #1124b6;
 }
 .formContainer{
   /* display: none; */
@@ -326,4 +346,136 @@ form input{
   margin: 0 auto;
   padding-top: 50px;
   padding-bottom: 50px;
+}
+.avatar{
+  display: flex;
+  justify-content: center;
+}
+form img{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: 3px solid #FFF;
+}
+form span{
+  background-color: #ece0e0;
+  padding: 10px;
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 20px;
+}
+form span:hover{
+  cursor: pointer;
+  background-color: rgb(174, 168, 168);
+}
+.formClose{
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* delete form */
+.DeleteFormContainer{
+  border: 1px solid black;
+  position: fixed;
+  top: 20%;
+  left: 18.5%;
+  display: none;
+  z-index: 2;
+  width: 100%;
+  max-width: 792px;
+  background-color: #FFF;
+  border-radius: 22px;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+.deleteEmployeeHead{
+  padding-bottom: 8px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.deleteEmployeeHead h3{
+  display: flex;
+  width: 218px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary-color);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.48px;
+}
+.deleteEmployeeHead i{
+  padding: 8px 12px;
+  margin-bottom: 7px;
+  color: var(--dark-blue);
+  background-color: #F4F7FE;
+  border-radius: 10px;
+}
+.deleteEmployeeHead i:hover{
+  background-color: #e2e5eb;
+}
+.delete-Employee-width{
+  max-width: 692px;
+  width: 100%;
+}
+.delete-employee{
+  color: var(--primary-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: -0.36px;
+  padding-top: 15px;
+}
+.deleteFormButtons{
+  margin-top: 20px;
+  flex-direction: row;
+}
+.delete-btn{
+  background-color: #EB506C;
+  color: #FFF;
+  border-radius: 16px;
+}
+.delete-btn:hover{
+  background-color: #EB506C;
+  color: #FFF;
+}
+.deleteFormButtons{
+  justify-content: flex-end;
+  display: flex;  
+  gap: 20px;  
+}
+.order-unset{
+  width: 100px;
+  height: 50px;
+  color: var(--primary-color);
+  background-color: #FAF9FF;
+  border-radius: 16px;
+  gap: 20px;
+}
+/*  */
+.buttonDiv{
+  display: flex;
+  justify-content: flex-end;
+}
+.button{
+  width: 100px;
+  height: 50px;
+  color: var(--primary-color);
+  /* background-color: #FAF9FF; */
+  border-radius: 16px;
+}
+/* Media query */
+@media screen and (max-width: 650px) {
+  .page {
+    flex-direction: column;
+  }
 }
