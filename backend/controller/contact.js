@@ -19,3 +19,22 @@ exports.update = async (req,res) => {
         console.error(error);
     }
 }
+
+exports.delete = async (req,res) => {
+    try {
+        let result = await contactList.delete(req.body._id);
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+exports.pagination = async (req,res) => {
+    let {page, list, search} = req.body;
+    try {
+        let result = await contactList.pagination(page, list, search);
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+    }
+}
