@@ -14,11 +14,12 @@ const PORT = process.env.PORT || 8080;
 connectDB();
 
 app.use(cors());
+
 // parse request to body-parser
 app.use(bodyparser.urlencoded({extended : true}));
 app.use(bodyparser.json());
 
 // load route
-// app.use('/' , require('./router/contact'));
+app.use('/' , require('./router/contact'));
 
 app.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`));

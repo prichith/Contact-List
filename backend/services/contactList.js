@@ -11,9 +11,10 @@ exports.add = async (query) => {
   }
 };
 
-exports.getAll = async () => {
+exports.pagination = async () => {
   try {
     const result = await List.find();
+
     return result;
   } catch (error) {
     console.error(error);

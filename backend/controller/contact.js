@@ -1,6 +1,15 @@
-// const List = require('../model/contact');
+const List = require('../model/contact');
 const contactList = require('../services/contactList');
 
+exports.getAll = async(req,res) => {
+    try {
+        let result = await List.find();
+        res.send(result);
+      } catch (error) {
+        res.status(500).send('List added failed !')
+        console.error(error) || console.log("List added failed");
+      }
+}
 exports.add = async(req,res) => {
     try {
         let result = await contactList.add(req.body);
