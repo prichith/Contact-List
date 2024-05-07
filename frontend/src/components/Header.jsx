@@ -1,4 +1,5 @@
 import ContactList from "./ContactList";
+import { Link } from "react-router-dom";
 
 function Header(){
     return(
@@ -14,7 +15,7 @@ function Header(){
       </header>
 
         <div className="list-head container">
-            <button id="addEmployeeOpen">Add Contact</button>
+            <Link to="/form"><button id="addEmployeeOpen">Add Contact</button></Link>
         </div>
         </>
     )

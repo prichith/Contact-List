@@ -1,5 +1,6 @@
 import avatar from '../image/avatar.png';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function Form(){
   const handleSubmit = async (event) => {
@@ -28,7 +29,7 @@ function Form(){
         <div className="formContainer">
         <form onSubmit={handleSubmit}>
           <div className="formClose">
-            <span><i className="fa-solid fa-xmark"></i></span>
+            <Link to='/'><span><i className="fa-solid fa-xmark"></i></span></Link>
           </div>
           <div className="avatar">
             <img src={avatar} alt="avatar"/>
