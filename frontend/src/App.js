@@ -19,15 +19,3 @@ function App() {
 }
 
 export default App;
-
-//
-// return (
-//   <>
-//   <Header />
-//   <List />
-//   <Form />
-//   <DeleteConfirmation />
-//   <Pagination />
-//   <Footer />
-//   </>
-// )

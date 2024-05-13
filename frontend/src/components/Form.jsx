@@ -13,15 +13,12 @@ function Form(){
     };
 
     try {
-      // const response = 
       await axios.post(
         "http://localhost:3002/contactlist",
         formData
       );
-      // if(response.status===200) alert(response.data);
     } catch (error) {
       console.error("Error:", error);
-      // alert('Blog posted failed !');
     }
   };
 
@@ -45,3 +42,4 @@ function Form(){
 }
 
 export default Form;
+

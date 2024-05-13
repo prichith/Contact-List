@@ -339,10 +339,8 @@ form button:hover{
   color: #1124b6;
 }
 .formContainer{
-  /* display: none; */
   max-width: 500px;
   margin: 0 auto;
-  padding-top: 50px;
   padding-bottom: 50px;
 }
 .avatar{
