@@ -1,80 +1,64 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Define the initial state
-const initialState = {
-  contactList: [],
-};
-
-// Define an async thunk for fetching contacts from the server
 export const fetchContacts = createAsyncThunk('list/fetchContacts', async () => {
   const response = await axios.get('http://localhost:3002/contactlist');
   return response.data;
 });
 
+export const deleteContact = createAsyncThunk('list/deleteContact', async (id) => {
+  console.log(id,'==delete contact id');
+  const response = await axios.delete(`http://localhost:3002/contactlist/${id}`);
+  console.log(response.data._id);
+  return response.data;
+});
 
-// Create a slice for managing the contact list
+const initialState = {
+  contactList: [],
+  formOpen : false,
+  formID : ""
+};
+
+
 const contactListSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
     addToList : (state, action) => {
-         state.contactList.push(action.payload);
+        //  state.contactList.push(action.payload);
         },
+    setFormOpen: (state) => {
+      state.formOpen = true;
+      console.log(initialState,'== initial state');
+    }
+      },
+    extraReducers: (builder) => {
+    builder
+      .addCase(fetchContacts.pending, (state) => {
+        console.log('loading');
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.contactList = action.payload;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
+        console.log('rejected');
+      })
+      .addCase(deleteContact.pending, (state, action) => {
+        console.log('loading');
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        console.log(action,'== action');
+        let id = action.payload._id;
+        let newContactList = state.contactList.filter((contact)=> id!== contact._id);
+        state.contactList = newContactList;
+        console.log(newContactList,'== contact list ');
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        console.log('rejected');
+      })
   }
 });
 
 export default contactListSlice.reducer;
+export const { setFormOpen } = contactListSlice.actions;
 
-
-// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import axios from "axios";
-
-// const INITIAL_STATE = {
-//    contactList: [],
-// };
-
-// const cartSlice = createSlice({
-//    name: "cart",
-//    initialState: INITIAL_STATE,
-//    reducers: {
-//       updateUser: (state, action) => {
-//          state.userDetail.push(action.payload);
-//       },
-//       addToCart: (state, action) => {
-//          const itemExist = state.cartList.find((item) => item.id === action.payload.id);
-//          if (itemExist) {
-//             state.cartList.forEach((item) => {
-//                if (item?.id === action.payload.id) {
-//                   item.count = 1;
-//                }
-//             });
-//             return;
-//          }
-//          state.cartList.push({
-//             ...action.payload,
-//             count: 1,
-//          });
-//       },
-//       increment: (state, action) => {
-//          const productID = action.payload;
-//          state.cartList.forEach((item) => {
-//             if (item?.id === productID) {
-//                item.count++;
-//             }
-//          });
-//       },
-//       decrement: (state, action) => {
-//          const productID = action.payload;
-//          state.cartList.forEach((item) => {
-//             if (item?.id === productID) {
-//                item.count--;
-//             }
-//          });
-//       },
-//    },
-// });
-
-// export const { increment, decrement, addToCart, updateUser } = cartSlice.actions;
-
-// export default cartSlice.reducer;

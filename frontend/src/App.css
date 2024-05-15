@@ -46,6 +46,7 @@ input,button,select:hover{
   margin: 0px auto;
   background-image: url("../public/image/milky-way-starry-sky-night-sky-star-956981.jpeg");
   background-size: fill;
+  /* height: 100vh; */
 }
 .container{
   padding: 10px 18px;
@@ -268,6 +269,8 @@ li img{
 footer{
   padding-top: 30px;
   padding-bottom: 30px;
+  position: relative;
+  bottom: 0px;
 }
 .socialmedia{
   width: 100%;
@@ -317,7 +320,16 @@ form{
   border: 1px solid white;
   padding: 25px 20px 40px 20px;
   border-radius: 15px;
-  background-color: rgb(13 4 40 / 50%);
+  background-color: rgb(13 4 40 / 90%);
+  position: absolute;
+  top: 100px;
+  /* left: 50%; */
+  /* right: 50%; */
+  max-width: 600px;
+  width: 100%;
+  left: 322px;
+  z-index: 2;
+  display: none;
 }
 form input{
   border-radius: 5px;
@@ -380,7 +392,6 @@ form span:hover{
   position: fixed;
   top: 20%;
   left: 18.5%;
-  display: none;
   z-index: 2;
   width: 100%;
   max-width: 792px;
@@ -388,6 +399,7 @@ form span:hover{
   border-radius: 22px;
   flex-direction: column;
   padding: 20px 30px;
+  display: none;
 }
 .deleteEmployeeHead{
   padding-bottom: 8px;
@@ -414,6 +426,9 @@ form span:hover{
   color: var(--dark-blue);
   background-color: #F4F7FE;
   border-radius: 10px;
+}
+.block{
+  display: block!important;
 }
 .deleteEmployeeHead i:hover{
   background-color: #e2e5eb;

@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <>
         <List />
-        <DeleteConfirmation />
+        {/* <DeleteConfirmation /> */}
         <Pagination />
     </>
   )
