@@ -336,6 +336,9 @@ form input{
   border: none;
   padding: 8px 30px;
 }
+.flex{
+  display: flex !important;
+}
 form button{
   border-radius: 5px;
   border: none;

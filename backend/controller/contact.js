@@ -13,7 +13,7 @@ exports.getAll = async (req, res) => {
 exports.add = async (req, res) => {
   try {
     let result = await contactList.add(req.body);
-    res.status(200).send("List added successfully");
+    res.status(200).send(result);
   } catch (error) {
     res.status(500).send("List added failed !");
     console.error(error) || console.log("List added failed");

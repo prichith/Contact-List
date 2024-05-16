@@ -1,31 +1,34 @@
 import React from 'react'
 import { useSelector , useDispatch} from "react-redux";
-import { Link } from 'react-router-dom';
 import DeleteConfirmation from './DeleteConfirmation';
 import Form from './Form';
 import { useState , useEffect } from 'react';
 import { fetchContacts } from "../redux/contactList";
+import { setFormOpen } from "../redux/contactList";
+import { setFormUpdate } from "../redux/contactList";
+
 
 
 function List() {
   const [deleteForm ,setDeleteForm] = useState(false);
-  const [form , setForm] = useState({});
   const [deleteID , setDeleteID] = useState();
-  const [editID , setEditID] = useState();
+  const [form , setForm] = useState();
   const {contactList} = useSelector((state => state.list));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
   dispatch(fetchContacts());
   }, [])
 
-// console.log(deleteForm);
   function edit(contact){
-    console.log(contact,'== contact');
-    // dispatch(setFormOpen());  
+    // console.log(contact,'== contact');
     setForm(contact);
+    dispatch(setFormOpen(true));
+    dispatch(setFormUpdate(true));
+
   }
-  console.log(form,'== state');
+  // console.log(form,'== state');
   function deleteList(id){
     // (deleteContact(id));  
     deleteForm===true ? setDeleteForm(false) : setDeleteForm(true);
@@ -49,11 +52,9 @@ function List() {
             </div>
           </div>
           <div className="manage">
-            {/* <Link to={`/form/${contact._id}`} > */}
             <span className="edit" onClick={()=> edit(contact)}>
               <i className="fa-solid fa-pen"></i>
             </span>
-            {/* </Link> */}
             <span className="delete" onClick={()=> deleteList(contact._id)}>
               <i className="fa-solid fa-trash"></i>
             </span>
@@ -62,7 +63,7 @@ function List() {
       ))}
     </ul>
     <DeleteConfirmation state={deleteForm} updateState={setDeleteForm} id={deleteID}/>
-    <Form state={form} updateState={setEditID} id={editID} />
+    <Form state={form} updateState={setForm}/>
     </>
   );
 }

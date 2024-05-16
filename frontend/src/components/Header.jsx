@@ -1,7 +1,14 @@
+import React from 'react';
 import ContactList from "./ContactList";
-import { Link } from "react-router-dom"; 
+import { useDispatch } from "react-redux";
+import { setFormOpen } from "../redux/contactList";
 
 function Header(){
+    const dispatch = useDispatch();
+
+    const openForm = ()=>{
+        dispatch(setFormOpen(true));
+    }
     return(
         <>
         <header className="container">
@@ -15,7 +22,8 @@ function Header(){
       </header>
 
         <div className="list-head container">
-            <Link to="/form"><button id="addEmployeeOpen">Add Contact</button></Link>
+            <button onClick={openForm} id="addEmployeeOpen">Add Contact</button>
+            {/* <Link to="/form"><button id="addEmployeeOpen">Add Contact</button></Link> */}
         </div>
         </>
     )
