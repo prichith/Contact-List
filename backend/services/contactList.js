@@ -34,7 +34,6 @@ exports.getContact = async (id) => {
     const result = await List.findById(id);
     return result;
   } catch (error) {
-    console.log('error-  in catch');
     console.error(error);
   }
 };

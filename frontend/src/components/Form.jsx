@@ -1,7 +1,7 @@
 import avatar from '../image/avatar.png';
 import { useEffect, useState } from 'react';
 import { useSelector , useDispatch} from "react-redux";
-import { setFormOpen , addContact , editContact} from "../redux/contactList";
+import { setFormOpen , addContact , editContact ,setFormUpdate} from "../redux/contactList";
 
 function Form(props){
   const [data , setData] = useState(props.state || {});
@@ -35,6 +35,7 @@ function Form(props){
       }
       dispatch(setFormOpen(false)); //close form
       props.updateState(); // reset the form
+      // dispatch(setFormUpdate(false));
     } catch (error) {
       console.error("Error:", error);
     }

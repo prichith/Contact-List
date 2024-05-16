@@ -22,8 +22,6 @@ exports.add = async (req, res) => {
 exports.update = async (req, res) => {
   let id = req.params.id;
   let query = req.body;
-  console.log(query);
-  console.log(id);
   try {
     let result = await contactList.update(id,query);
     res.status(200).send("List Updated successfully");
