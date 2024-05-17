@@ -51,12 +51,45 @@ exports.delete = async (req, res) => {
   }
 };
 
+// exports.pagination = async (req, res) => {
+//   let { page, list, search } = req.body;
+//   try {
+//     let result = await contactList.pagination(page, list, search);
+//     res.send(result);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
 exports.pagination = async (req, res) => {
-  let { page, list, search } = req.body;
+  let page = parseInt(req.params.page);
+  let limit = parseInt(req.params.limit);
+  let text = req.params.search;
+  let startIndex = (page - 1) * limit;
+  let query = {};
+
+  console.log('page=',page,' limit=',limit,' text=',text,' startIndex= ',startIndex);
+  if (text!== 'undefined') {
+      query = {
+          $or: [
+              { firstname: { $regex: text, $options: "i" } },
+              // { email: { $regex: text, $options: "i" } },
+              // { phone: { $regex: text, $options: "i" } },
+              // { state: { $regex: text, $options: "i" } },
+              // { country: { $regex: text, $options: "i" } }
+          ]
+      }};
+console.log(query,'==query');
   try {
-    let result = await contactList.pagination(page, list, search);
-    res.send(result);
+      let result = await contactList.pagination(startIndex, limit, query);
+      if (result) {
+          res.json({ data: result.finalData[0], totalEmployee: result.totalCount, firstIndex: startIndex });
+      } else {
+          console.log('Fetching failed');
+          res.status(500).json({ error: 'Failed to fetch data' });
+      }
   } catch (error) {
-    console.error(error);
+      console.log('Error:', error);
+      res.status(500).json({ error: 'Internal server error' });
   }
-};
+}

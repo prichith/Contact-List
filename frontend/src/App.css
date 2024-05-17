@@ -321,8 +321,8 @@ form{
   padding: 25px 20px 40px 20px;
   border-radius: 15px;
   background-color: rgb(13 4 40 / 90%);
-  position: absolute;
-  top: 100px;
+  /* position: absolute; */
+  /* top: 100px; */
   /* left: 50%; */
   /* right: 50%; */
   max-width: 600px;
@@ -330,6 +330,8 @@ form{
   left: 322px;
   z-index: 2;
   display: none;
+  top: 58px;
+  position: fixed;
 }
 form input{
   border-radius: 5px;

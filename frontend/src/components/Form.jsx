@@ -11,7 +11,9 @@ function Form(props){
 
   function toggleForm(){
     formOpen ? dispatch(setFormOpen(false)) : dispatch(setFormOpen(true));
-    props.updateState();
+    // props.updateState();
+    setData({});
+    dispatch(setFormUpdate(false));
   }
 
   useEffect(() => {
@@ -34,8 +36,9 @@ function Form(props){
         dispatch(editContact({ formData, id: data._id }));
       }
       dispatch(setFormOpen(false)); //close form
-      props.updateState(); // reset the form
-      // dispatch(setFormUpdate(false));
+      // props.updateState(); // reset the form
+      setData({}); // reset the form
+      dispatch(setFormUpdate(false));
     } catch (error) {
       console.error("Error:", error);
     }
@@ -49,7 +52,7 @@ function Form(props){
     }));
   }
 
-    return(
+  return(
         <div className="formContainer">
         <form className={`${formOpen ? 'flex' : null}`} onSubmit={handleSubmit}>
           <div className="formClose">

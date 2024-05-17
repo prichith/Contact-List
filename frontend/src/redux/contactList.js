@@ -3,8 +3,11 @@ import axios from "axios";
 
 export const fetchContacts = createAsyncThunk(
   "list/fetchContacts",
-  async () => {
-    const response = await axios.get("http://localhost:3002/contactlist");
+  async ({page,limit,search}) => {
+    console.log('page==',page);
+    console.log('limit==',limit);
+    const response = await axios.get(`http://localhost:3002/contactlist/${page}/${limit}/${search}`);
+    // const response = await axios.get("http://localhost:3002/contactlist");
     return response.data;
   }
 );
@@ -37,7 +40,8 @@ const initialState = {
   contactList: [],
   formOpen: false,
   formUpdate : false,
-  formID: "",
+  totalContact : 0
+  // formID: "",
 };
 
 const contactListSlice = createSlice({
@@ -57,7 +61,9 @@ const contactListSlice = createSlice({
         console.log("loading");
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.contactList = action.payload;
+        console.log(action.payload,'==payload');
+        state.contactList = action.payload.data ? action.payload.data: '';
+        state.totalContact = action.payload.totalEmployee;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         console.log("rejected");

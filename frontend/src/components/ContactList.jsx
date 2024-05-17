@@ -1,17 +1,29 @@
-import React, {useEffect} from 'react'
+import React, {useEffect , useState} from 'react';
+import { useSelector , useDispatch} from "react-redux";
+import { fetchContacts } from '../redux/contactList';
 
-let listNo;
+
 const ContactList = () => {
-useEffect(() => {
-    listNo = document.getElementById("contactList").value;
-  }, []); 
+  const [limit , setLimit] = useState(5);
+  const dispatch = useDispatch();
+  const {totalContact} = useSelector((state => state.list));
+  let search;
+
+  useEffect(() => {
+    dispatch(fetchContacts({page:1,limit:limit,search:search})) //fetching Data from DB
+  }, [limit]);
+
+  function limitChange(event){
+    setLimit(event.target.value);
+    console.log(event.target.value,'== limit');
+  }
 
   return (
     <div className="main-heading">
     <div className="page">
       <h3>Contact List</h3>
       <div className="contactList">
-        <select id="contactList" className="list-page" defaultValue='5' >
+        <select id="contactList" className="list-page" defaultValue='5' onChange={limitChange}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -23,7 +35,7 @@ useEffect(() => {
           <option value="9">9</option>
           <option value="10">10</option>
       </select>
-      <p>of <span className="totalContacts">10</span></p>
+      <p>of <span className="totalContacts">{totalContact}</span></p>
       </div>
   </div>
   </div>
@@ -31,7 +43,4 @@ useEffect(() => {
 }
 
 
-
 export default ContactList;
-export {listNo};
-// exports.module = listNo;
