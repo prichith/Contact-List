@@ -1,16 +1,14 @@
-import React from 'react'
-import List from './List';
-import DeleteConfirmation from './DeleteConfirmation';
-import Pagination from './Pagination';
+import React from "react";
+import List from "./List";
+import Pagination from "./Pagination";
 
 const Dashboard = () => {
   return (
     <>
-        <List />
-        {/* <DeleteConfirmation /> */}
-        <Pagination />
+      <List />
+      <Pagination />
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

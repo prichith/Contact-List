@@ -214,10 +214,10 @@ li img{
   cursor : pointer
 }
 /* pagination */
-.pageActive{
+/* .pageActive{
   background-color: var(--dark-blue);
   color: #FFF !important;
-}
+} */
 .pagination{
   display: flex;
   justify-content: center;
@@ -237,6 +237,10 @@ li img{
   font-weight: 600;
 }
 .pagination div span:hover{
+  background-color: #FFF !important;
+  color: blue !important;
+}
+.pageActive{
   background-color: #FFF !important;
   color: blue !important;
 }

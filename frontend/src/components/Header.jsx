@@ -1,41 +1,52 @@
-import React from 'react';
+import React from "react";
 import ContactList from "./ContactList";
-import { useDispatch } from "react-redux";
-import { setFormOpen ,fetchContacts} from "../redux/contactList";
-import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setFormOpen,
+  fetchContacts,
+  setSearchText,
+} from "../redux/contactList";
 
+function Header() {
+  const { contactLimit } = useSelector((state) => state.list);
+  const dispatch = useDispatch();
 
-function Header(){
-    const [text , setText] = useState();
-    const dispatch = useDispatch();
+  const openForm = () => {
+    dispatch(setFormOpen(true));
+  };
 
-    const openForm = ()=>{
-        dispatch(setFormOpen(true));
-    }
+  async function search(event) {
+    let value = event.target.value || undefined;
+    dispatch(setSearchText(value));
+    dispatch(fetchContacts({ page: 1, limit: contactLimit, search: value }));
+  }
 
-    async function search(event){
-        // let result = await setText(event.target.value);
-        let result = await setText(event.target.value);
-        dispatch(fetchContacts({page:1,limit:5,search:text}));
-    }
-
-    return(
-        <>
-        <header className="container">
+  return (
+    <>
+      <header className="container">
         <ContactList />
         <div className="search-bar">
           <div>
-              <span className="material-symbols-outlined search-icon">search</span>
-              <input onChange={search} id="search" type="search" placeholder="Search" />
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input
+              onChange={search}
+              id="search"
+              type="search"
+              placeholder="Search"
+            />
           </div>
-      </div>
+        </div>
       </header>
 
-        <div className="list-head container">
-            <button onClick={openForm} id="addEmployeeOpen">Add Contact</button>
-        </div>
-        </>
-    )
+      <div className="list-head container">
+        <button onClick={openForm} id="addEmployeeOpen">
+          Add Contact
+        </button>
+      </div>
+    </>
+  );
 }
 
 export default Header;
