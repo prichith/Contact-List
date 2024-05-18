@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { notify } from "../App";
 
 const initialState = {
   contactList: [],
@@ -44,6 +45,7 @@ const contactListSlice = createSlice({
         console.log("loading");
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
+        notify('Employee Deleted Successfully');
         let id = action.payload._id;
         let newContactList = state.contactList.filter(
           (contact) => id !== contact._id
@@ -54,6 +56,7 @@ const contactListSlice = createSlice({
         console.log("rejected");
       })
       .addCase(editContact.fulfilled, (state, action) => {
+        notify('Employee Updated Successfully');
         const updatedContact = action.meta.arg.formData;
         const id = action.meta.arg.id;
         const index = state.contactList.findIndex(
@@ -64,6 +67,7 @@ const contactListSlice = createSlice({
         }
       })
       .addCase(addContact.fulfilled, (state, action) => {
+        notify('Employee Added Successfully');
         state.contactList.push(action.payload);
       });
   },

@@ -42,8 +42,6 @@ exports.getContact = async (id) => {
 };
 
 exports.pagination = async (startIndex, limit, query) => {
-  console.log(" limit=", limit, " startIndex= ", startIndex, "query=", query);
-
   let aggregationPipeline = [
     { $match: query },
     {
