@@ -34,7 +34,7 @@ const contactListSlice = createSlice({
         console.log("loading");
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        console.log(action.payload, "==payload");
+        // console.log(action.payload, "==payload");
         state.contactList = action.payload.data ? action.payload.data : "";
         state.totalContact = action.payload.totalEmployee;
       })
@@ -68,7 +68,9 @@ const contactListSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         notify('Employee Added Successfully');
-        state.contactList.push(action.payload);
+        if(state.contactList.length !== state.contactLimit){
+          state.contactList.push(action.payload);
+        }
       });
   },
 });

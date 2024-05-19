@@ -73,6 +73,7 @@ function Form(props) {
           name="name"
           value={data.name || ""}
           onChange={changeData}
+          required
         />
         <input
           id="email"
@@ -81,6 +82,7 @@ function Form(props) {
           name="email"
           value={data.email || ""}
           onChange={changeData}
+          required
         />
         <input
           id="phone"
@@ -89,6 +91,7 @@ function Form(props) {
           name="phone"
           value={data.phone || ""}
           onChange={changeData}
+          required
         />
         <input
           id="place"
@@ -97,6 +100,7 @@ function Form(props) {
           name="place"
           value={data.place || ""}
           onChange={changeData}
+          required
         />
         {formUpdate ? (
           <button id="addContact">Update Contact</button>

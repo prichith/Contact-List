@@ -25,7 +25,8 @@ function Pagination() {
       );
     }
     setPageSpans(newPageSpans);
-  }, [changePage,pages]);
+  }, [pages]);
+  // }, [changePage,pages]);
 
   function changePage(pageNumber) {
     pageBtnActive(pageNumber);
