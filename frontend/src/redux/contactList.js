@@ -34,7 +34,6 @@ const contactListSlice = createSlice({
         console.log("loading");
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        // console.log(action.payload, "==payload");
         state.contactList = action.payload.data ? action.payload.data : "";
         state.totalContact = action.payload.totalEmployee;
       })
