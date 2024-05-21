@@ -39,10 +39,7 @@ function List() {
             <li key={contact._id}>
               <div className="details">
                 <div>
-                  <img
-                    src={avatar}
-                    alt=""
-                  />
+                  <img src={avatar} alt="" />
                 </div>
                 <div>
                   <h4>{contact.name}</h4>

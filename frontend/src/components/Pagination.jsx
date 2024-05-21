@@ -1,9 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { fetchContacts } from "../redux/contactList";
+import { useState, useEffect, useRef } from "react";
+import {
+  fetchContacts,
+  setContactsPerPage,
+} from "../redux/contactList";
 
 function Pagination() {
   const [pageSpans, setPageSpans] = useState([]);
+  const pageRefs = useRef([]);
   const { totalContact, contactLimit, searchText } = useSelector(
     (state) => state.list
   );
@@ -16,7 +20,7 @@ function Pagination() {
       newPageSpans.push(
         <span
           key={i}
-          id={`page${i}`}
+          ref={(el) => (pageRefs.current[i] = el)}
           className={i === 1 ? "pageActive" : ""}
           onClick={() => changePage(i)}
         >
@@ -26,7 +30,6 @@ function Pagination() {
     }
     setPageSpans(newPageSpans);
   }, [pages]);
-  // }, [changePage,pages]);
 
   function changePage(pageNumber) {
     pageBtnActive(pageNumber);
@@ -36,19 +39,20 @@ function Pagination() {
         limit: contactLimit,
         search: searchText,
       })
-    );
+    ).then((result) => {
+      const newLimit = result.payload.limit;
+      dispatch(setContactsPerPage(newLimit));
+    });
   }
 
   function pageBtnActive(ID) {
-    let activePage = document.getElementById(`page${ID}`);
-    for (let i = 1; i <= pages; i++) {
-      if (
-        document.getElementById("page" + i).classList.contains("pageActive")
-      ) {
-        document.getElementById("page" + i).classList.remove("pageActive");
-      }
+    pageRefs.current.forEach((ref) => {
+      if (ref) ref.classList.remove("pageActive");
+    });
+
+    if (pageRefs.current[ID]) {
+      pageRefs.current[ID].classList.add("pageActive");
     }
-    activePage.classList.add("pageActive");
   }
 
   return (
@@ -69,4 +73,5 @@ function Pagination() {
     </div>
   );
 }
+
 export default Pagination;

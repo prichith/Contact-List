@@ -1,15 +1,4 @@
-const List = require("../model/contact");
 const contactList = require("../services/contactList");
-
-exports.getAll = async (req, res) => {
-  try {
-    let result = await List.find();
-    res.send(result);
-  } catch (error) {
-    res.status(500).send("List added failed !");
-    console.error(error) || console.log("List added failed");
-  }
-};
 
 exports.add = async (req, res) => {
   try {
@@ -30,16 +19,6 @@ exports.update = async (req, res) => {
   } catch (error) {
     res.status(500).send("List Updated failed !");
     console.error(error) || console.log("List Updated failed");
-  }
-};
-
-exports.getContact = async (req, res) => {
-  let id = req.params.id;
-  try {
-    let result = await contactList.getContact(id);
-    res.send(result);
-  } catch (error) {
-    console.error(error);
   }
 };
 

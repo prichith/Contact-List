@@ -41,12 +41,14 @@ input{
 input,button,select:hover{
   cursor: pointer;
 }
+body{
+  background-image: url("../public/image/milky-way-starry-sky-night-sky-star-956981.jpeg");
+  height: 100vh;
+}
 .body{
   max-width: 1300px;
   margin: 0px auto;
-  background-image: url("../public/image/milky-way-starry-sky-night-sky-star-956981.jpeg");
   background-size: fill;
-  /* height: 100vh; */
 }
 .container{
   padding: 10px 18px;
@@ -127,6 +129,7 @@ input:hover{
   display: flex;
   gap: 15px;
   align-items: center;
+  min-width: 400px;
 }
 .page h3{
   letter-spacing: 4px;

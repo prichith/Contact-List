@@ -25,6 +25,13 @@ function Header() {
     <>
       <header className="container">
         <ContactList />
+
+        <div className="list-head container">
+        <button onClick={openForm} id="addEmployeeOpen">
+          Add Contact
+        </button>
+      </div>
+
         <div className="search-bar">
           <div>
             <span className="material-symbols-outlined search-icon">
@@ -39,12 +46,6 @@ function Header() {
           </div>
         </div>
       </header>
-
-      <div className="list-head container">
-        <button onClick={openForm} id="addEmployeeOpen">
-          Add Contact
-        </button>
-      </div>
     </>
   );
 }

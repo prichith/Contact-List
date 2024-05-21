@@ -9,6 +9,7 @@ const initialState = {
   totalContact: 0,
   contactLimit: 5,
   searchText: undefined,
+  contactsPerPage: 5,
 };
 
 const contactListSlice = createSlice({
@@ -27,6 +28,9 @@ const contactListSlice = createSlice({
     setSearchText: (state, action) => {
       state.searchText = action.payload;
     },
+    setContactsPerPage: (state, action) => {
+      state.contactsPerPage = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,7 +48,7 @@ const contactListSlice = createSlice({
         console.log("loading");
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        notify('Employee Deleted Successfully');
+        notify("Employee Deleted Successfully");
         let id = action.payload._id;
         let newContactList = state.contactList.filter(
           (contact) => id !== contact._id
@@ -55,7 +59,7 @@ const contactListSlice = createSlice({
         console.log("rejected");
       })
       .addCase(editContact.fulfilled, (state, action) => {
-        notify('Employee Updated Successfully');
+        notify("Employee Updated Successfully");
         const updatedContact = action.meta.arg.formData;
         const id = action.meta.arg.id;
         const index = state.contactList.findIndex(
@@ -66,9 +70,12 @@ const contactListSlice = createSlice({
         }
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        notify('Employee Added Successfully');
-        if(state.contactList.length !== state.contactLimit){
-          state.contactList.push(action.payload);
+        notify("Employee Added Successfully");
+        if (state.contactList.length !== state.contactLimit) {
+          state.contactList.unshift(action.payload);
+        } else {
+          state.contactList.unshift(action.payload);
+          state.contactList.pop();
         }
       });
   },
@@ -80,7 +87,9 @@ export const fetchContacts = createAsyncThunk(
     const response = await axios.get(
       `http://localhost:3002/contactlist/${page}/${limit}/${search}`
     );
-    return response.data;
+    const data = response.data.data || [];
+    const totalEmployee = response.data.totalEmployee;
+    return { data, totalEmployee, limit: data.length };
   }
 );
 
@@ -117,5 +126,10 @@ export const addContact = createAsyncThunk(
 );
 
 export default contactListSlice.reducer;
-export const { setFormOpen, setFormUpdate, setContactLimit, setSearchText } =
-  contactListSlice.actions;
+export const {
+  setFormOpen,
+  setFormUpdate,
+  setContactLimit,
+  setSearchText,
+  setContactsPerPage,
+} = contactListSlice.actions;

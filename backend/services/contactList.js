@@ -31,16 +31,6 @@ exports.delete = async (id) => {
   }
 };
 
-exports.getContact = async (id) => {
-  try {
-    const result = await List.findById(id);
-
-    return result;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 exports.pagination = async (startIndex, limit, query) => {
   let aggregationPipeline = [
     { $match: query },

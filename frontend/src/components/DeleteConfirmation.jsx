@@ -9,6 +9,7 @@ function DeleteConfirmation(props) {
   function deleteFormClose() {
     props.updateState(false);
   }
+
   function deleteContactByID() {
     dispatch(deleteContact(id));
     deleteFormClose();

@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchContacts, setContactLimit } from "../redux/contactList";
+import {
+  fetchContacts,
+  setContactLimit,
+  setContactsPerPage,
+} from "../redux/contactList";
+
+const limitOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
 const ContactList = () => {
   const [limit, setLimit] = useState(5);
   const dispatch = useDispatch();
-  const { totalContact } = useSelector((state) => state.list);
-  const { searchText } = useSelector((state) => state.list);
+  const { totalContact,searchText,contactLimit,contactsPerPage } = useSelector((state) => state.list);
 
   useEffect(() => {
-    dispatch(fetchContacts({ page: 1, limit: limit, search: searchText })); //fetching Data from DB
-  }, [limit]);
+    dispatch(fetchContacts({ page: 1, limit, search: searchText })).then(
+      (result) => {
+        const newLimit = result.payload.limit;
+        dispatch(setContactsPerPage(newLimit));
+      }
+    );
+  }, [limit, searchText]);
 
   function limitChange(event) {
     setLimit(event.target.value);
@@ -26,21 +36,19 @@ const ContactList = () => {
           <select
             id="contactList"
             className="list-page"
-            defaultValue="5"
+            value={contactLimit}
             onChange={limitChange}
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+            {limitOptions
+              .filter((value) => value <= totalContact)
+              .map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
           </select>
           <p>
+            <span className="totalContacts">{contactsPerPage}</span>
             of <span className="totalContacts">{totalContact}</span>
           </p>
         </div>

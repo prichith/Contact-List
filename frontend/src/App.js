@@ -20,6 +20,7 @@ export const notify = (message) => {
 };
 
 function App() {
+  
   return (
     <BrowserRouter>
       <Header />
