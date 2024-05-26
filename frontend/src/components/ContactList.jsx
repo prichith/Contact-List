@@ -49,7 +49,7 @@ const ContactList = () => {
           </select>
           <p>
             <span className="totalContacts">{contactsPerPage}</span>
-            of <span className="totalContacts">{totalContact}</span>
+             of <span className="totalContacts">{totalContact}</span>
           </p>
         </div>
       </div>
